@@ -1,2 +1,2 @@
 language: python
-script: testingcalculator
+script: testingcalculator.py
