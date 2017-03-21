@@ -1,2 +1,7 @@
 language: python
-script: testingcalculator.py
+python: "3.5.3"
+install:
+  - python -m pip install --upgrade pip
+script: python testingcalculator.py
+notifications:
+  email: false
