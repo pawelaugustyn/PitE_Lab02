@@ -101,7 +101,7 @@ class TestCalculator(unittest.TestCase):
         excepted_result = 3
         self.assertEqual(excepted_result, c.logarithm(number, base))
 
-    def test_logarithm_by_one_raises_exception(self):
+    def test_logarithm_base_equals_one_raises_exception(self):
         c = Calculator()
         number = 8
         base = 1
@@ -128,13 +128,39 @@ class TestCalculator(unittest.TestCase):
     ###################################
     # Testing derivative operation  ###
     ###################################
-    @patch('sympy.diff', return_value="sin(x)")
-    def test_derivative_correct_answer(self, mock):
+    @patch('Calculator.Calculator.derivative')
+    def test_derivative_correct_answer_huge_calculations(self, mock):
         c = Calculator()
+        mock.return_value = "sin(x)"
         equation = "sin(x)"
         degree = 100
         excepted_result = "sin(x)"
-        self.assertEqual(excepted_result, c.derivative(equation, degree))
+        self.assertEqual(excepted_result, str(c.derivative(equation, degree)))
+
+    def test_derivative_correct_answer_simple_equation(self):
+        c = Calculator()
+        equation = "6*x**3 + 5*sin(x)"
+        degree = 2
+        excepted_result = "36*x - 5*sin(x)"
+        self.assertEqual(excepted_result, str(c.derivative(equation, degree)))
+
+    def test_derivative_wrong_function_raises_exception(self):
+        c = Calculator()
+        equation = 34
+        degree = 2
+        self.assertRaises(exceptions.NotAFunction, c.derivative, equation, degree)
+
+    def test_derivative_not_integer_degree_raises_exception(self):
+        c = Calculator()
+        equation = "6*x**3"
+        degree = 1.5
+        self.assertRaises(exceptions.NotInteger, c.derivative, equation, degree)
+
+    def test_derivative_not_positive_degree_raises_exception(self):
+        c = Calculator()
+        equation = "6*x**5"
+        degree = -2
+        self.assertRaises(exceptions.NotPositiveNumber, c.derivative, equation, degree)
 
 if __name__ == "__main__":
     unittest.main()
