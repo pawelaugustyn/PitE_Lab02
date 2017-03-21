@@ -1,10 +1,10 @@
-from unittest import TestCase
+import unittest
 from unittest.mock import patch
 from Calculator import Calculator
 import exceptions
 
 
-class TestCalculator(TestCase):
+class TestCalculator(unittest.TestCase):
     ###########################
     # Testing add operation ###
     ###########################
@@ -135,3 +135,6 @@ class TestCalculator(TestCase):
         degree = 100
         excepted_result = "sin(x)"
         self.assertEqual(excepted_result, c.derivative(equation, degree))
+
+if __name__ == "__main__":
+    unittest.main()
