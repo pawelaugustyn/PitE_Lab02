@@ -1,6 +1,6 @@
 # PitE_Lab02
 
-https://travis-ci.org/pawelaugustyn/PitE_Lab02.svg?branch=master
+[![Build Status](https://travis-ci.org/pawelaugustyn/PitE_Lab02.svg?branch=master)](https://travis-ci.org/pawelaugustyn/PitE_Lab02)
 
 Files in that folder realise second home assignment from Python in the Enterprise's labs.
 
